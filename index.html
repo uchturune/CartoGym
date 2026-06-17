@@ -163,6 +163,7 @@ main{display:flex;height:calc(100vh - 104px)}
 .dtype{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:7px 9px;cursor:pointer;transition:all .18s;font-size:11px;font-weight:600;color:var(--muted)}
 .dtype:hover{border-color:var(--cyan);color:var(--cyan)}
 .dtype.on{border-color:var(--cyan);background:rgba(0,200,255,0.1);color:var(--cyan)}
+.modnote{background:rgba(0,200,255,0.07);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:11px;color:var(--text);line-height:1.5;margin-bottom:14px;display:flex;gap:8px;align-items:flex-start}
 
 /* TOAST */
 .toast{position:fixed;bottom:22px;right:22px;z-index:3000;background:var(--dark2);border:1px solid rgba(0,200,255,0.38);border-radius:9px;padding:11px 15px;font-size:12px;color:var(--cyan);box-shadow:0 0 18px rgba(0,200,255,0.18);transform:translateY(70px);opacity:0;transition:all .28s;font-weight:600}
@@ -290,11 +291,15 @@ main{display:flex;height:calc(100vh - 104px)}
     <div class="mhead">
       <div>
         <div class="mtit">Ajouter une salle</div>
-        <div class="msub">Votre salle apparaîtra sur la carte après vérification</div>
+        <div class="msub">Soumettez votre salle pour qu'elle soit ajoutée à la carte</div>
       </div>
       <button class="mclose" onclick="closeModal('addModal')">✕</button>
     </div>
     <div class="mbody">
+      <div class="modnote">
+        <span>🛡️</span>
+        <span>Votre salle sera <strong>vérifiée manuellement</strong> par notre équipe avant d'apparaître publiquement sur la carte. Cela peut prendre quelques jours.</span>
+      </div>
       <div class="fgrp">
         <label class="flb">Nom de la salle *</label>
         <input class="finp" id="fNom" type="text" placeholder="Ex: Force Club Paris">
@@ -350,9 +355,6 @@ main{display:flex;height:calc(100vh - 104px)}
 
 <script>
 // ══════════════════════════════════════════
-// ⚠️  REMPLACEZ CES DEUX VALEURS
-//     (Settings → API dans votre projet Supabase)
-// ══════════════════════════════════════════
 const SUPABASE_URL = 'https://nlxjazoyjshxssielzxv.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5seGphem95anNoeHNzaWVsenh2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MTgzMDYsImV4cCI6MjA5NzE5NDMwNn0.ovFK7RZMcJoyATwnNWiXJparaMGBaqSqA4AkLBTMxGw';
 // ══════════════════════════════════════════
@@ -377,8 +379,14 @@ const map = L.map('map',{zoomControl:false}).setView([46.5,2.5],6);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(map);
 
 // ── LOAD GYMS ──
+// ⚠️ MODÉRATION : seules les salles avec verified = true (validées manuellement
+// dans Supabase) sont récupérées et affichées sur le site.
 async function loadGyms() {
-  const {data,error} = await sb.from('salles').select('*').order('note',{ascending:false});
+  const {data,error} = await sb
+    .from('salles')
+    .select('*')
+    .eq('verified', true)
+    .order('note',{ascending:false});
   if(error){ console.error(error); showToast('❌ Erreur de connexion à la base'); return; }
   allGyms = data || [];
   renderAll(allGyms);
@@ -524,12 +532,16 @@ async function submitGym() {
     monolift: document.getElementById('eMono').checked,
     plateforme: document.getElementById('ePlat').checked,
     disques: document.getElementById('eDisq').checked,
-    note: 0, nb_avis: 0
+    note: 0, nb_avis: 0,
+    verified: false   // ⚠️ MODÉRATION : la salle reste invisible sur le site
+                       // tant que vous ne passez pas ce champ à `true`
+                       // manuellement dans la table "salles" sur Supabase.
   }]);
   if(error){ showToast('❌ Erreur lors de l\'envoi'); console.error(error); return; }
   closeModal('addModal');
   showToast('✅ Salle soumise ! Elle apparaîtra après vérification.');
-  loadGyms();
+  // On ne recharge pas la liste publique ici : la salle n'est pas encore
+  // visible (verified=false) tant qu'elle n'a pas été validée sur Supabase.
 }
 
 // ── UTILS ──
