@@ -81,6 +81,8 @@ main{display:flex;height:calc(100vh - 104px)}
 .tc{background:rgba(0,200,100,0.11);color:#4dff9a;border:1px solid rgba(0,200,100,0.21)}
 .tm{background:rgba(0,200,255,0.11);color:var(--cyan);border:1px solid rgba(0,200,255,0.21)}
 .tv{background:rgba(180,80,255,0.11);color:#c580ff;border:1px solid rgba(180,80,255,0.21)}
+.taw{background:rgba(168,85,247,0.11);color:#a855f7;border:1px solid rgba(168,85,247,0.21)}
+.tsc{background:rgba(255,255,255,0.1);color:#ffffff;border:1px solid rgba(255,255,255,0.25)}
 .geq{margin-top:7px;display:flex;gap:7px;flex-wrap:wrap}
 .ei{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--muted)}
 .eok{color:#4dff9a}.eno{color:#ff5555;opacity:.5}
@@ -206,6 +208,8 @@ main{display:flex;height:calc(100vh - 104px)}
   <div class="ftag on" data-filter="haltero" onclick="togFilter(this)">Haltérophilie</div>
   <div class="ftag on" data-filter="crossfit" onclick="togFilter(this)">CrossFit</div>
   <div class="ftag on" data-filter="muscu" onclick="togFilter(this)">Musculation</div>
+  <div class="ftag on" data-filter="armwrestling" onclick="togFilter(this)">Bras de Fer</div>
+  <div class="ftag on" data-filter="strictcurl" onclick="togFilter(this)">Strict Curl</div>
   <div class="sep"></div>
   <span class="flbl">Matériel :</span>
   <div class="ftag" data-equip="calibree" onclick="togFilter(this)">🏋️ Barre calibrée</div>
@@ -239,6 +243,8 @@ main{display:flex;height:calc(100vh - 104px)}
       <div class="li"><div class="ld" style="background:#ffb347;box-shadow:0 0 5px #ffb347"></div>Haltérophilie</div>
       <div class="li"><div class="ld" style="background:#4dff9a;box-shadow:0 0 5px #4dff9a"></div>CrossFit</div>
       <div class="li"><div class="ld" style="background:#00c8ff;box-shadow:0 0 5px #00c8ff"></div>Musculation</div>
+      <div class="li"><div class="ld" style="background:#a855f7;box-shadow:0 0 5px #a855f7"></div>Bras de Fer</div>
+      <div class="li"><div class="ld" style="background:#ffffff;box-shadow:0 0 5px #ffffff"></div>Strict Curl</div>
     </div>
   </div>
 </main>
@@ -331,6 +337,8 @@ main{display:flex;height:calc(100vh - 104px)}
           <div class="dtype" data-val="haltero" onclick="togDtype(this)">🟠 Haltérophilie</div>
           <div class="dtype" data-val="muscu" onclick="togDtype(this)">🔵 Musculation</div>
           <div class="dtype" data-val="crossfit" onclick="togDtype(this)">🟢 CrossFit</div>
+          <div class="dtype" data-val="armwrestling" onclick="togDtype(this)">🟣 Bras de Fer</div>
+          <div class="dtype" data-val="strictcurl" onclick="togDtype(this)">⚪ Strict Curl</div>
         </div>
       </div>
       <div class="fgrp">
@@ -362,8 +370,8 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const TCOL = { power:'#ff5555', haltero:'#ffb347', crossfit:'#4dff9a', muscu:'#00c8ff', mma:'#c580ff' };
-const TLBL = { power:'Powerlifting', haltero:'Haltérophilie', crossfit:'CrossFit', muscu:'Musculation', mma:'MMA' };
+const TCOL = { power:'#ff5555', haltero:'#ffb347', crossfit:'#4dff9a', muscu:'#00c8ff', mma:'#c580ff', armwrestling:'#a855f7', strictcurl:'#ffffff' };
+const TLBL = { power:'Powerlifting', haltero:'Haltérophilie', crossfit:'CrossFit', muscu:'Musculation', mma:'MMA', armwrestling:'Bras de Fer', strictcurl:'Strict Curl' };
 const EQUIPS = [
   {key:'calibree',label:'Barre calibrée'},{key:'rack',label:'Combo rack'},
   {key:'monolift',label:'Monolift'},{key:'plateforme',label:'Plateforme'},
@@ -371,7 +379,7 @@ const EQUIPS = [
 ];
 
 let allGyms = [], markers = {}, currentGym = null;
-let activeFilters = new Set(['power','haltero','crossfit','muscu']);
+let activeFilters = new Set(['power','haltero','crossfit','muscu','armwrestling','strictcurl']);
 let activeEquips = new Set();
 
 // ── MAP ──
@@ -403,7 +411,7 @@ function stars(r) {
   let s=''; for(let i=1;i<=5;i++) s+=`<span class="s ${i<=Math.round(r)?'son':'sof'}">★</span>`; return s;
 }
 function tagHtml(t) {
-  const cls = {power:'tp',haltero:'th',crossfit:'tc',muscu:'tm',mma:'tv'};
+  const cls = {power:'tp',haltero:'th',crossfit:'tc',muscu:'tm',mma:'tv',armwrestling:'taw',strictcurl:'tsc'};
   return `<span class="tag ${cls[t]||'tm'}">${TLBL[t]||t}</span>`;
 }
 
