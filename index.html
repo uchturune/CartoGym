@@ -645,7 +645,7 @@ async function openEspace() {
   const { data: mesSalles } = await sb.from('salles').select('*').eq('submitted_by', currentUser.id).order('created_at',{ascending:false});
   const sEl = document.getElementById('espaceSalles');
   if (!mesSalles || !mesSalles.length) {
-    sEl.innerHTML = '<div class="espace-empty">Vous n\\'avez pas encore ajouté de salle.</div>';
+    sEl.innerHTML = '<div class="espace-empty">Vous n avez pas encore ajouté de salle.</div>';
   } else {
     sEl.innerHTML = mesSalles.map(s => `
       <div class="espace-row">
@@ -841,7 +841,7 @@ async function submitReview() {
     salle_id: currentGym.id, user_id: currentUser.id, auteur_email: currentUser.email,
     note: selectedStars, commentaire
   }]);
-  if (error) { showToast('❌ Erreur lors de l\\'envoi de l\\'avis'); console.error(error); return; }
+  if (error) { showToast('❌ Erreur lors de l\'envoi de l\'avis'); console.error(error); return; }
 
   // Recalcule la note moyenne de la salle
   const { data: tousAvis } = await sb.from('avis').select('note').eq('salle_id', currentGym.id);
@@ -887,7 +887,7 @@ async function submitModifRequest() {
     salle_id: currentGym.id, user_id: currentUser.id, auteur_email: currentUser.email,
     champ, valeur_proposee, commentaire
   }]);
-  if (error) { showToast('❌ Erreur lors de l\\'envoi'); console.error(error); return; }
+  if (error) { showToast('❌ Erreur lors de l\'envoi'); console.error(error); return; }
   closeModal('modifModal');
   showToast('✅ Suggestion envoyée, merci ! Suivez son statut dans "Mon espace".');
 }
@@ -916,7 +916,7 @@ async function submitGym() {
     note: 0, nb_avis: 0, verified: false,
     submitted_by: currentUser ? currentUser.id : null
   }]);
-  if(error){ showToast('❌ Erreur lors de l\\'envoi'); console.error(error); return; }
+  if(error){ showToast('❌ Erreur lors de l\'envoi'); console.error(error); return; }
   closeModal('addModal');
   showToast(currentUser ? '✅ Salle soumise ! Suivez son statut dans "Mon espace".' : '✅ Salle soumise ! Elle apparaîtra après vérification.');
 }
