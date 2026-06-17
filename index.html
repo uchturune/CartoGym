@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="CartoGym — Trouvez les meilleures salles de powerlifting, haltérophilie et musculation près de chez vous.">
+<meta name="description" content="CartoGym — Trouvez les meilleures salles de musculation près de chez vous.">
 <link rel="icon" type="image/png" href="Logo-CartoGYM.png">
-<title>CartoGym — Trouve ta salle de force</title>
+<title>CartoGym — Trouve ta salle</title>
 
 <!-- ⚠️ ADSENSE : décommenter après validation Google -->
 <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
@@ -29,10 +29,11 @@ nav{display:flex;gap:4px}
 .nl{padding:6px 11px;font-size:11.5px;font-weight:600;letter-spacing:.4px;color:var(--muted);background:none;border:none;cursor:pointer;border-radius:6px;transition:all .2s;text-transform:uppercase}
 .nl:hover,.nl.on{color:var(--cyan);background:rgba(0,200,255,0.08)}
 .auth{display:flex;gap:7px}
-.bmem{padding:6px 14px;font-size:11.5px;font-weight:700;border:1px solid var(--border);background:rgba(0,200,255,0.06);color:var(--cyan);border-radius:7px;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.4px}
+.bmem{padding:6px 14px;font-size:11.5px;font-weight:700;border:1px solid var(--border);background:rgba(0,200,255,0.06);color:var(--cyan);border-radius:7px;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:6px}
 .bmem:hover{background:rgba(0,200,255,0.14);border-color:var(--cyan)}
 .bcoa{padding:6px 14px;font-size:11.5px;font-weight:700;background:var(--cyan);color:#07090f;border:none;border-radius:7px;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.4px;box-shadow:0 0 14px rgba(0,200,255,0.35)}
 .bcoa:hover{background:#00e5ff;box-shadow:0 0 22px rgba(0,200,255,0.55)}
+.avatar-dot{width:7px;height:7px;border-radius:50%;background:#4dff9a;box-shadow:0 0 6px #4dff9a}
 
 /* FILTERS */
 .filters{height:48px;display:flex;align-items:center;gap:7px;padding:0 14px;background:var(--dark2);border-bottom:1px solid var(--border);overflow-x:auto;z-index:999;scrollbar-width:none}
@@ -144,13 +145,13 @@ main{display:flex;height:calc(100vh - 104px)}
 .rname{font-size:12px;font-weight:700;color:#e8f4fb}
 .rdate{font-size:10px;color:var(--muted)}
 .rtxt{font-size:11px;color:var(--text);line-height:1.5}
-.mfoot{padding:12px 18px;border-top:1px solid var(--border);display:flex;gap:7px}
+.mfoot{padding:12px 18px;border-top:1px solid var(--border);display:flex;gap:7px;flex-wrap:wrap}
 .bprim{flex:1;padding:9px;font-size:12px;font-weight:700;letter-spacing:.4px;background:var(--cyan);color:#07090f;border:none;border-radius:7px;cursor:pointer;text-transform:uppercase;box-shadow:0 0 12px rgba(0,200,255,0.28);transition:all .18s}
 .bprim:hover{background:#00e5ff;box-shadow:0 0 20px rgba(0,200,255,0.48)}
 .bsec{padding:9px 14px;font-size:12px;font-weight:700;letter-spacing:.4px;background:rgba(0,200,255,0.07);color:var(--cyan);border:1px solid var(--border);border-radius:7px;cursor:pointer;text-transform:uppercase;transition:all .18s}
 .bsec:hover{border-color:var(--cyan);background:rgba(0,200,255,0.13)}
 
-/* ADD GYM MODAL */
+/* ADD GYM / FORM MODAL */
 .amodal{background:var(--dark2);border:1px solid var(--border);border-radius:13px;width:440px;max-height:85vh;overflow-y:auto;box-shadow:0 0 40px rgba(0,200,255,0.13);transform:translateY(18px);transition:transform .22s;position:relative}
 .moverlay.open .amodal{transform:translateY(0)}
 .fgrp{margin-bottom:13px}
@@ -158,6 +159,8 @@ main{display:flex;height:calc(100vh - 104px)}
 .finp{width:100%;padding:8px 11px;background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;outline:none;font-family:'Barlow',sans-serif;transition:border-color .18s}
 .finp:focus{border-color:var(--cyan)}
 .finp::placeholder{color:var(--muted)}
+textarea.finp{resize:vertical;min-height:64px;font-family:'Barlow',sans-serif}
+select.finp{cursor:pointer}
 .frow2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .cklist{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px}
 .ckitem{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text);cursor:pointer}
@@ -167,6 +170,35 @@ main{display:flex;height:calc(100vh - 104px)}
 .dtype:hover{border-color:var(--cyan);color:var(--cyan)}
 .dtype.on{border-color:var(--cyan);background:rgba(0,200,255,0.1);color:var(--cyan)}
 .modnote{background:rgba(0,200,255,0.07);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:11px;color:var(--text);line-height:1.5;margin-bottom:14px;display:flex;gap:8px;align-items:flex-start}
+
+/* STAR PICKER */
+.starpick{display:flex;gap:5px;margin-bottom:4px}
+.starpick span{font-size:24px;color:#2a3a4a;cursor:pointer;transition:color .15s}
+.starpick span.on{color:#ffd700}
+
+/* AUTH MODAL */
+.auth-modal{background:var(--dark2);border:1px solid var(--border);border-radius:14px;width:380px;box-shadow:0 0 40px rgba(0,200,255,0.15);transform:translateY(18px);transition:transform .22s;padding:28px;position:relative}
+.moverlay.open .auth-modal{transform:translateY(0)}
+.auth-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;color:var(--cyan);text-align:center;margin-bottom:4px;letter-spacing:1px;text-shadow:0 0 15px rgba(0,200,255,0.4)}
+.auth-sub{font-size:12px;color:var(--muted);text-align:center;margin-bottom:22px}
+.auth-tabs{display:flex;background:var(--card);border-radius:8px;padding:3px;margin-bottom:20px;gap:3px}
+.auth-tab{flex:1;padding:7px;font-size:12px;font-weight:700;text-align:center;border-radius:6px;cursor:pointer;border:none;background:none;color:var(--muted);transition:all .2s;text-transform:uppercase;letter-spacing:.4px}
+.auth-tab.on{background:rgba(0,200,255,0.15);color:var(--cyan);border:1px solid rgba(0,200,255,0.25)}
+.auth-error{font-size:11px;color:#ff6060;background:rgba(255,80,80,0.08);border:1px solid rgba(255,80,80,0.2);border-radius:6px;padding:8px 10px;margin-bottom:12px;display:none}
+.auth-error.show{display:block}
+
+/* MON ESPACE */
+.espace-row{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.espace-info{flex:1;min-width:0}
+.espace-name{font-size:12px;font-weight:700;color:#e8f4fb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.espace-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.statut-badge{font-size:9px;font-weight:700;padding:3px 8px;border-radius:10px;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
+.statut-ok{background:rgba(0,200,100,0.14);color:#4dff9a;border:1px solid rgba(0,200,100,0.24)}
+.statut-attente{background:rgba(255,179,71,0.12);color:#ffb347;border:1px solid rgba(255,179,71,0.22)}
+.statut-refuse{background:rgba(255,80,80,0.1);color:#ff6060;border:1px solid rgba(255,80,80,0.2)}
+.espace-empty{text-align:center;padding:18px;font-size:11.5px;color:var(--muted)}
+.espace-email{text-align:center;font-size:11px;color:var(--muted);margin-bottom:16px}
+.espace-email strong{color:var(--cyan)}
 
 /* WELCOME MODAL */
 .wmodal{background:var(--dark2);border:1px solid var(--border);border-radius:14px;width:460px;max-height:85vh;overflow-y:auto;box-shadow:0 0 50px rgba(0,200,255,0.18);transform:translateY(18px);transition:transform .22s;position:relative;padding:0}
@@ -188,8 +220,8 @@ main{display:flex;height:calc(100vh - 104px)}
 .wm-footer{padding:14px 24px 20px}
 .wm-close-btn{width:100%;padding:11px;font-size:12.5px;font-weight:700;letter-spacing:.4px;background:var(--cyan);color:#07090f;border:none;border-radius:8px;cursor:pointer;text-transform:uppercase;box-shadow:0 0 16px rgba(0,200,255,0.32);transition:all .2s}
 .wm-close-btn:hover{background:#00e5ff;box-shadow:0 0 22px rgba(0,200,255,0.5)}
-.wm-dismiss{display:block;text-align:center;font-size:10.5px;color:var(--muted);margin-top:10px;cursor:pointer;text-decoration:underline;background:none;border:none;width:100%}
-.wm-dismiss:hover{color:var(--cyan)}
+
+/* TOAST */
 .toast{position:fixed;bottom:22px;right:22px;z-index:3000;background:var(--dark2);border:1px solid rgba(0,200,255,0.38);border-radius:9px;padding:11px 15px;font-size:12px;color:var(--cyan);box-shadow:0 0 18px rgba(0,200,255,0.18);transform:translateY(70px);opacity:0;transition:all .28s;font-weight:600}
 .toast.show{transform:translateY(0);opacity:1}
 </style>
@@ -212,8 +244,8 @@ main{display:flex;height:calc(100vh - 104px)}
     <button class="nl" onclick="openAddGym()">+ Ajouter ma salle</button>
   </nav>
 
-  <div class="auth">
-    <button class="bmem" onclick="showToast('🚧 Bientôt disponible')">Connexion Membre</button>
+  <div class="auth" id="authArea">
+    <button class="bmem" onclick="openAuth('login')">Connexion Membre</button>
     <button class="bcoa" onclick="showToast('🚧 Bientôt disponible')">Espace Coach</button>
   </div>
 </header>
@@ -300,6 +332,14 @@ main{display:flex;height:calc(100vh - 104px)}
         <div class="msecttit">Matériel disponible</div>
         <div class="egrid" id="dEquip"></div>
       </div>
+      <div class="msect" id="reviewFormSect" style="display:none">
+        <div class="msecttit">Votre avis</div>
+        <div class="starpick" id="starPick">
+          <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
+        </div>
+        <textarea class="finp" id="reviewText" placeholder="Votre expérience dans cette salle (optionnel)" style="margin-bottom:8px"></textarea>
+        <button class="bsec" style="width:100%" onclick="submitReview()">Publier mon avis</button>
+      </div>
       <div class="msect">
         <div class="msecttit">Avis récents</div>
         <div id="dReviews"></div>
@@ -307,7 +347,8 @@ main{display:flex;height:calc(100vh - 104px)}
     </div>
     <div class="mfoot">
       <button class="bprim" id="dDirectBtn">🗺️ Y aller</button>
-      <button class="bsec" onclick="showToast('⭐ Fonction disponible après connexion')">⭐ Laisser un avis</button>
+      <button class="bsec" id="dReviewBtn" onclick="toggleReviewForm()">⭐ Laisser un avis</button>
+      <button class="bsec" onclick="openModifRequest()">✏️ Suggérer une modif.</button>
       <button class="bsec" onclick="shareGym()">📤 Partager</button>
     </div>
   </div>
@@ -381,7 +422,95 @@ main{display:flex;height:calc(100vh - 104px)}
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- MODIFICATION REQUEST MODAL -->
+<div class="moverlay" id="modifModal">
+  <div class="amodal">
+    <div class="mhead">
+      <div>
+        <div class="mtit">Suggérer une modification</div>
+        <div class="msub" id="modifSalleName">—</div>
+      </div>
+      <button class="mclose" onclick="closeModal('modifModal')">✕</button>
+    </div>
+    <div class="mbody">
+      <div class="fgrp">
+        <label class="flb">Champ concerné *</label>
+        <select class="finp" id="modifChamp">
+          <option value="nom">Nom de la salle</option>
+          <option value="adresse">Adresse</option>
+          <option value="ville">Ville</option>
+          <option value="disciplines">Disciplines</option>
+          <option value="equipement">Matériel disponible</option>
+          <option value="horaires">Horaires</option>
+          <option value="fermeture">Salle fermée / n'existe plus</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+      <div class="fgrp">
+        <label class="flb">Valeur ou correction proposée *</label>
+        <textarea class="finp" id="modifValeur" placeholder="Ex: l'adresse exacte est 12 rue des Lilas, pas 14"></textarea>
+      </div>
+      <div class="fgrp">
+        <label class="flb">Commentaire (optionnel)</label>
+        <textarea class="finp" id="modifCommentaire" placeholder="Précisions, source de l'info..."></textarea>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="bprim" onclick="submitModifRequest()">✓ Envoyer la suggestion</button>
+      <button class="bsec" onclick="closeModal('modifModal')">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="moverlay" id="authModal">
+  <div class="auth-modal">
+    <div class="auth-title">CARTOGYM</div>
+    <div class="auth-sub" id="authSub">Connexion membre</div>
+    <div class="auth-tabs">
+      <button class="auth-tab on" id="tabLogin" onclick="switchAuthTab('login')">Connexion</button>
+      <button class="auth-tab" id="tabSignup" onclick="switchAuthTab('signup')">Créer un compte</button>
+    </div>
+    <div class="auth-error" id="authError"></div>
+    <div class="fgrp">
+      <label class="flb">Email</label>
+      <input class="finp" id="authEmail" type="email" placeholder="votre@email.fr">
+    </div>
+    <div class="fgrp">
+      <label class="flb">Mot de passe</label>
+      <input class="finp" id="authPassword" type="password" placeholder="•••••••• (6 caractères min.)">
+    </div>
+    <button class="bprim" style="width:100%;margin-top:6px" id="authSubmitBtn" onclick="handleAuthSubmit()">Se connecter</button>
+    <button class="mclose" style="position:absolute;top:14px;right:14px" onclick="closeModal('authModal')">✕</button>
+  </div>
+</div>
+
+<!-- MON ESPACE MODAL -->
+<div class="moverlay" id="espaceModal">
+  <div class="amodal">
+    <div class="mhead">
+      <div>
+        <div class="mtit">Mon espace</div>
+        <div class="msub">Vos contributions à CartoGym</div>
+      </div>
+      <button class="mclose" onclick="closeModal('espaceModal')">✕</button>
+    </div>
+    <div class="mbody">
+      <div class="espace-email">Connecté en tant que <strong id="espaceEmail">—</strong></div>
+      <div class="msect">
+        <div class="msecttit">Salles que j'ai ajoutées</div>
+        <div id="espaceSalles"><div class="espace-empty">Chargement...</div></div>
+      </div>
+      <div class="msect">
+        <div class="msecttit">Mes demandes de modification</div>
+        <div id="espaceModifs"><div class="espace-empty">Chargement...</div></div>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="bsec" style="width:100%" onclick="handleLogout()">Se déconnecter</button>
+    </div>
+  </div>
+</div>
 
 <!-- WELCOME MODAL -->
 <div class="moverlay" id="welcomeModal">
@@ -413,6 +542,8 @@ main{display:flex;height:calc(100vh - 104px)}
   </div>
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script>
 // ══════════════════════════════════════════
 const SUPABASE_URL = 'https://nlxjazoyjshxssielzxv.supabase.co';
@@ -422,15 +553,15 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const TCOL = { power:'#ff5555', haltero:'#ffb347', crossfit:'#4dff9a', muscu:'#00c8ff', mma:'#c580ff', armwrestling:'#a855f7', strictcurl:'#ffffff' };
-const TLBL = { power:'Powerlifting', haltero:'Haltérophilie', crossfit:'CrossFit', muscu:'Musculation', mma:'MMA', armwrestling:'Bras de Fer', strictcurl:'Strict Curl' };
+const TCOL = { power:'#ff5555', haltero:'#ffb347', crossfit:'#4dff9a', muscu:'#00c8ff', armwrestling:'#a855f7', strictcurl:'#ffffff' };
+const TLBL = { power:'Powerlifting', haltero:'Haltérophilie', crossfit:'CrossFit', muscu:'Musculation', armwrestling:'Bras de Fer', strictcurl:'Strict Curl' };
 const EQUIPS = [
   {key:'calibree',label:'Barre calibrée'},{key:'rack',label:'Combo rack'},
   {key:'monolift',label:'Monolift'},{key:'plateforme',label:'Plateforme'},
   {key:'disques',label:'Disques calibrés'},{key:'verified',label:'Certifiée FFForce'}
 ];
 
-let allGyms = [], markers = {}, currentGym = null;
+let allGyms = [], markers = {}, currentGym = null, currentUser = null, selectedStars = 0;
 let activeFilters = new Set(['power','haltero','crossfit','muscu','armwrestling','strictcurl']);
 let activeEquips = new Set();
 
@@ -438,9 +569,115 @@ let activeEquips = new Set();
 const map = L.map('map',{zoomControl:false}).setView([46.5,2.5],6);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(map);
 
-// ── LOAD GYMS ──
-// ⚠️ MODÉRATION : seules les salles avec verified = true (validées manuellement
-// dans Supabase) sont récupérées et affichées sur le site.
+// ══════════════════════════════════════════
+// AUTHENTIFICATION
+// ══════════════════════════════════════════
+async function refreshAuthUI() {
+  const { data } = await sb.auth.getUser();
+  currentUser = data?.user || null;
+  const area = document.getElementById('authArea');
+  if (currentUser) {
+    area.innerHTML = `
+      <button class="bmem" onclick="openEspace()"><span class="avatar-dot"></span> ${currentUser.email}</button>
+      <button class="bcoa" onclick="showToast('🚧 Bientôt disponible')">Espace Coach</button>`;
+  } else {
+    area.innerHTML = `
+      <button class="bmem" onclick="openAuth('login')">Connexion Membre</button>
+      <button class="bcoa" onclick="showToast('🚧 Bientôt disponible')">Espace Coach</button>`;
+  }
+}
+
+function openAuth(tab) {
+  document.getElementById('authError').classList.remove('show');
+  document.getElementById('authEmail').value = '';
+  document.getElementById('authPassword').value = '';
+  switchAuthTab(tab);
+  document.getElementById('authModal').classList.add('open');
+}
+
+function switchAuthTab(t) {
+  document.getElementById('tabLogin').classList.toggle('on', t==='login');
+  document.getElementById('tabSignup').classList.toggle('on', t==='signup');
+  document.getElementById('authSub').textContent = t==='signup' ? 'Créer un compte membre' : 'Connexion membre';
+  document.getElementById('authSubmitBtn').textContent = t==='signup' ? 'Créer mon compte' : 'Se connecter';
+  document.getElementById('authSubmitBtn').dataset.mode = t;
+  document.getElementById('authError').classList.remove('show');
+}
+
+async function handleAuthSubmit() {
+  const mode = document.getElementById('authSubmitBtn').dataset.mode || 'login';
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPassword').value;
+  const errEl = document.getElementById('authError');
+  errEl.classList.remove('show');
+  if (!email || !password) { errEl.textContent = 'Veuillez remplir les deux champs.'; errEl.classList.add('show'); return; }
+
+  if (mode === 'signup') {
+    const { error } = await sb.auth.signUp({ email, password });
+    if (error) { errEl.textContent = error.message; errEl.classList.add('show'); return; }
+    closeModal('authModal');
+    showToast('✅ Compte créé ! Vérifiez vos emails si besoin, puis connectez-vous.');
+    await refreshAuthUI();
+  } else {
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) { errEl.textContent = error.message; errEl.classList.add('show'); return; }
+    closeModal('authModal');
+    showToast('✅ Connexion réussie !');
+    await refreshAuthUI();
+  }
+}
+
+async function handleLogout() {
+  await sb.auth.signOut();
+  currentUser = null;
+  closeModal('espaceModal');
+  showToast('👋 Déconnecté');
+  await refreshAuthUI();
+}
+
+// ── MON ESPACE ──
+async function openEspace() {
+  document.getElementById('espaceEmail').textContent = currentUser?.email || '—';
+  document.getElementById('espaceModal').classList.add('open');
+  document.getElementById('espaceSalles').innerHTML = '<div class="espace-empty">Chargement...</div>';
+  document.getElementById('espaceModifs').innerHTML = '<div class="espace-empty">Chargement...</div>';
+
+  const { data: mesSalles } = await sb.from('salles').select('*').eq('submitted_by', currentUser.id).order('created_at',{ascending:false});
+  const sEl = document.getElementById('espaceSalles');
+  if (!mesSalles || !mesSalles.length) {
+    sEl.innerHTML = '<div class="espace-empty">Vous n\\'avez pas encore ajouté de salle.</div>';
+  } else {
+    sEl.innerHTML = mesSalles.map(s => `
+      <div class="espace-row">
+        <div class="espace-info">
+          <div class="espace-name">${s.nom}</div>
+          <div class="espace-meta">${s.ville||''}</div>
+        </div>
+        <span class="statut-badge ${s.verified?'statut-ok':'statut-attente'}">${s.verified?'✓ Publiée':'⏳ En vérification'}</span>
+      </div>`).join('');
+  }
+
+  const { data: mesModifs } = await sb.from('modifications_demandees').select('*, salles(nom)').eq('user_id', currentUser.id).order('created_at',{ascending:false});
+  const mEl = document.getElementById('espaceModifs');
+  if (!mesModifs || !mesModifs.length) {
+    mEl.innerHTML = '<div class="espace-empty">Aucune demande de modification envoyée.</div>';
+  } else {
+    const statutCls = {en_attente:'statut-attente', approuvee:'statut-ok', refusee:'statut-refuse'};
+    const statutLbl = {en_attente:'⏳ En attente', approuvee:'✓ Approuvée', refusee:'✗ Refusée'};
+    mEl.innerHTML = mesModifs.map(m => `
+      <div class="espace-row">
+        <div class="espace-info">
+          <div class="espace-name">${m.salles?.nom || 'Salle supprimée'}</div>
+          <div class="espace-meta">${m.champ} — ${(m.valeur_proposee||'').slice(0,40)}${(m.valeur_proposee||'').length>40?'...':''}</div>
+        </div>
+        <span class="statut-badge ${statutCls[m.statut]||'statut-attente'}">${statutLbl[m.statut]||m.statut}</span>
+      </div>`).join('');
+  }
+}
+
+// ══════════════════════════════════════════
+// SALLES
+// ══════════════════════════════════════════
 async function loadGyms() {
   const {data,error} = await sb
     .from('salles')
@@ -458,12 +695,11 @@ function renderAll(gyms) {
   renderMarkers(gyms);
 }
 
-// ── SIDEBAR ──
 function stars(r) {
   let s=''; for(let i=1;i<=5;i++) s+=`<span class="s ${i<=Math.round(r)?'son':'sof'}">★</span>`; return s;
 }
 function tagHtml(t) {
-  const cls = {power:'tp',haltero:'th',crossfit:'tc',muscu:'tm',mma:'tv',armwrestling:'taw',strictcurl:'tsc'};
+  const cls = {power:'tp',haltero:'th',crossfit:'tc',muscu:'tm',armwrestling:'taw',strictcurl:'tsc'};
   return `<span class="tag ${cls[t]||'tm'}">${TLBL[t]||t}</span>`;
 }
 
@@ -471,7 +707,7 @@ function renderSidebar(gyms) {
   const el = document.getElementById('gymList');
   if(!gyms.length){ el.innerHTML='<div class="loading"><span style="color:var(--muted)">Aucune salle trouvée</span></div>'; return; }
   el.innerHTML = gyms.map(g=>`
-    <div class="gcard" id="card-${g.id}" onclick="openDetail(${JSON.stringify(g).replace(/"/g,'&quot;')})">
+    <div class="gcard" id="card-${g.id}" onclick='openDetail(${JSON.stringify(g)})'>
       <div class="gtop">
         <div><div class="gname">${g.nom}</div><div class="gdist">${g.ville}</div></div>
         <div style="text-align:right">
@@ -491,7 +727,6 @@ function renderSidebar(gyms) {
     </div>`).join('');
 }
 
-// ── MARKERS ──
 function renderMarkers(gyms) {
   Object.values(markers).forEach(m=>map.removeLayer(m));
   markers = {};
@@ -507,7 +742,7 @@ function renderMarkers(gyms) {
       <div class="paddr">📍 ${g.adresse||''} ${g.ville||''}</div>
       <div style="display:flex;align-items:center;gap:3px;margin-bottom:7px">${stars(g.note)}<span style="font-size:11px;color:var(--muted);margin-left:3px">${g.note||'—'} (${g.nb_avis||0} avis)</span></div>
       <div class="ptags">${(g.disciplines||[]).map(tagHtml).join('')}</div>
-      <button class="pbtn" onclick="openDetail(${JSON.stringify(g).replace(/"/g,"'")})">Voir la fiche →</button>`);
+      <button class="pbtn" onclick='openDetail(${JSON.stringify(g)})'>Voir la fiche complète →</button>`);
     m.on('click',()=>highlightCard(g.id));
     markers[g.id] = m;
   });
@@ -519,11 +754,10 @@ function highlightCard(id) {
   if(c){ c.classList.add('act'); c.scrollIntoView({behavior:'smooth',block:'nearest'}); }
 }
 
-// ── FILTERS ──
 function togFilter(el) {
   el.classList.toggle('on');
   const f = el.dataset.filter, e = el.dataset.equip;
-  if(f){ f in Object.fromEntries([...activeFilters].map(x=>[x,1])) ? activeFilters.delete(f) : activeFilters.add(f); }
+  if(f){ activeFilters.has(f) ? activeFilters.delete(f) : activeFilters.add(f); }
   if(e){ activeEquips.has(e) ? activeEquips.delete(e) : activeEquips.add(e); }
   filterGyms();
 }
@@ -539,9 +773,10 @@ function filterGyms() {
   renderAll(filtered);
 }
 
-// ── DETAIL MODAL ──
-function openDetail(g) {
-  if(typeof g === 'string') g = JSON.parse(g);
+// ══════════════════════════════════════════
+// FICHE DÉTAIL + AVIS
+// ══════════════════════════════════════════
+async function openDetail(g) {
   currentGym = g;
   document.getElementById('dName').textContent = g.nom;
   document.getElementById('dAddr').textContent = '📍 ' + (g.adresse||'') + ' ' + (g.ville||'');
@@ -549,21 +784,80 @@ function openDetail(g) {
   document.getElementById('dStars').innerHTML = stars(g.note);
   document.getElementById('dAvisCount').textContent = (g.nb_avis||0) + ' avis';
   document.getElementById('dTags').innerHTML = (g.disciplines||[]).map(tagHtml).join('') + (g.verified?'<span class="tag" style="background:rgba(0,200,255,0.1);color:var(--cyan);border:1px solid rgba(0,200,255,0.2)">✅ Certifiée FFForce</span>':'');
-  // Bars
-  const bars = [5,4,3,2,1].map(i=>`<div class="rrow"><span class="rlbl">${i}</span><div class="rtrk"><div class="rfil" style="width:${i===5?68:i===4?21:i===3?9:i===2?2:0}%"></div></div><span class="rcnt2">${i===5?32:i===4?10:i===3?4:i===2?1:0}</span></div>`).join('');
-  document.getElementById('dBars').innerHTML = bars;
-  // Equipment
   document.getElementById('dEquip').innerHTML = EQUIPS.map(e=>`<div class="erow"><span class="ename">${e.label}</span><span class="ebadge ${g[e.key]?'byes':'bno'}">${g[e.key]?'✓ Oui':'✗ Non'}</span></div>`).join('');
-  // Reviews placeholder
-  document.getElementById('dReviews').innerHTML = `
-    <div style="text-align:center;padding:14px;font-size:11px;color:var(--muted)">Aucun avis pour le moment. Connectez-vous pour être le premier à en laisser un.</div>`;
-  // Direction button
   document.getElementById('dDirectBtn').onclick = () => window.open(`https://www.google.com/maps/dir/?api=1&destination=${g.lat},${g.lng}`,'_blank');
-  // Highlight card + zoom map
+
+  document.getElementById('reviewFormSect').style.display = 'none';
+  selectedStars = 0;
+  document.querySelectorAll('#starPick span').forEach(s=>s.classList.remove('on'));
+  document.getElementById('reviewText').value = '';
+
+  await loadReviews(g.id);
   highlightCard(g.id);
   map.setView([g.lat,g.lng],13);
   markers[g.id]?.openPopup();
   document.getElementById('detailModal').classList.add('open');
+}
+
+async function loadReviews(salleId) {
+  const el = document.getElementById('dReviews');
+  el.innerHTML = '<div class="espace-empty">Chargement des avis...</div>';
+  const { data, error } = await sb.from('avis').select('*').eq('salle_id', salleId).order('created_at',{ascending:false}).limit(20);
+  if (error || !data || !data.length) {
+    el.innerHTML = '<div style="text-align:center;padding:14px;font-size:11px;color:var(--muted)">Aucun avis pour le moment. Connectez-vous pour être le premier à en laisser un.</div>';
+    return;
+  }
+  el.innerHTML = data.map(r => `
+    <div class="rev">
+      <div class="revtop">
+        <span class="rname">${(r.auteur_email||'Membre').split('@')[0]}</span>
+        <div style="display:flex;align-items:center;gap:6px">
+          <div class="stars">${stars(r.note)}</div>
+          <span class="rdate">${new Date(r.created_at).toLocaleDateString('fr-FR')}</span>
+        </div>
+      </div>
+      ${r.commentaire ? `<div class="rtxt">${r.commentaire}</div>` : ''}
+    </div>`).join('');
+}
+
+function toggleReviewForm() {
+  if (!currentUser) { openAuth('login'); showToast('🔒 Connectez-vous pour laisser un avis'); return; }
+  const sect = document.getElementById('reviewFormSect');
+  sect.style.display = sect.style.display === 'none' ? '' : 'none';
+}
+
+document.getElementById('starPick').addEventListener('click', e => {
+  const v = e.target.dataset.v;
+  if (!v) return;
+  selectedStars = parseInt(v);
+  document.querySelectorAll('#starPick span').forEach(s => s.classList.toggle('on', parseInt(s.dataset.v) <= selectedStars));
+});
+
+async function submitReview() {
+  if (!currentUser) { openAuth('login'); return; }
+  if (!selectedStars) { showToast('⚠️ Choisissez une note (étoiles)'); return; }
+  const commentaire = document.getElementById('reviewText').value.trim();
+  const { error } = await sb.from('avis').insert([{
+    salle_id: currentGym.id, user_id: currentUser.id, auteur_email: currentUser.email,
+    note: selectedStars, commentaire
+  }]);
+  if (error) { showToast('❌ Erreur lors de l\\'envoi de l\\'avis'); console.error(error); return; }
+
+  // Recalcule la note moyenne de la salle
+  const { data: tousAvis } = await sb.from('avis').select('note').eq('salle_id', currentGym.id);
+  if (tousAvis && tousAvis.length) {
+    const moyenne = tousAvis.reduce((s,a)=>s+a.note,0) / tousAvis.length;
+    await sb.from('salles').update({ note: Math.round(moyenne*10)/10, nb_avis: tousAvis.length }).eq('id', currentGym.id);
+    currentGym.note = Math.round(moyenne*10)/10;
+    currentGym.nb_avis = tousAvis.length;
+  }
+
+  showToast('✅ Avis publié, merci !');
+  document.getElementById('reviewFormSect').style.display = 'none';
+  await loadReviews(currentGym.id);
+  document.getElementById('dNote').textContent = currentGym.note;
+  document.getElementById('dStars').innerHTML = stars(currentGym.note);
+  document.getElementById('dAvisCount').textContent = currentGym.nb_avis + ' avis';
 }
 
 function shareGym() {
@@ -572,7 +866,35 @@ function shareGym() {
   navigator.clipboard?.writeText(url).then(()=>showToast('🔗 Lien copié !')).catch(()=>showToast('🔗 '+url));
 }
 
-// ── ADD GYM ──
+// ══════════════════════════════════════════
+// DEMANDE DE MODIFICATION
+// ══════════════════════════════════════════
+function openModifRequest() {
+  if (!currentUser) { closeModal('detailModal'); openAuth('login'); showToast('🔒 Connectez-vous pour suggérer une modification'); return; }
+  document.getElementById('modifSalleName').textContent = currentGym.nom;
+  document.getElementById('modifChamp').value = 'nom';
+  document.getElementById('modifValeur').value = '';
+  document.getElementById('modifCommentaire').value = '';
+  document.getElementById('modifModal').classList.add('open');
+}
+
+async function submitModifRequest() {
+  const champ = document.getElementById('modifChamp').value;
+  const valeur_proposee = document.getElementById('modifValeur').value.trim();
+  const commentaire = document.getElementById('modifCommentaire').value.trim();
+  if (!valeur_proposee) { showToast('⚠️ Décrivez la modification proposée'); return; }
+  const { error } = await sb.from('modifications_demandees').insert([{
+    salle_id: currentGym.id, user_id: currentUser.id, auteur_email: currentUser.email,
+    champ, valeur_proposee, commentaire
+  }]);
+  if (error) { showToast('❌ Erreur lors de l\\'envoi'); console.error(error); return; }
+  closeModal('modifModal');
+  showToast('✅ Suggestion envoyée, merci ! Suivez son statut dans "Mon espace".');
+}
+
+// ══════════════════════════════════════════
+// AJOUT DE SALLE
+// ══════════════════════════════════════════
 function openAddGym() { document.getElementById('addModal').classList.add('open'); }
 function togDtype(el) { el.classList.toggle('on'); }
 
@@ -591,16 +913,12 @@ async function submitGym() {
     monolift: document.getElementById('eMono').checked,
     plateforme: document.getElementById('ePlat').checked,
     disques: document.getElementById('eDisq').checked,
-    note: 0, nb_avis: 0,
-    verified: false   // ⚠️ MODÉRATION : la salle reste invisible sur le site
-                       // tant que vous ne passez pas ce champ à `true`
-                       // manuellement dans la table "salles" sur Supabase.
+    note: 0, nb_avis: 0, verified: false,
+    submitted_by: currentUser ? currentUser.id : null
   }]);
-  if(error){ showToast('❌ Erreur lors de l\'envoi'); console.error(error); return; }
+  if(error){ showToast('❌ Erreur lors de l\\'envoi'); console.error(error); return; }
   closeModal('addModal');
-  showToast('✅ Salle soumise ! Elle apparaîtra après vérification.');
-  // On ne recharge pas la liste publique ici : la salle n'est pas encore
-  // visible (verified=false) tant qu'elle n'a pas été validée sur Supabase.
+  showToast(currentUser ? '✅ Salle soumise ! Suivez son statut dans "Mon espace".' : '✅ Salle soumise ! Elle apparaîtra après vérification.');
 }
 
 // ── UTILS ──
@@ -612,11 +930,10 @@ function showToast(msg) {
   setTimeout(()=>t.classList.remove('show'),2800);
 }
 
-function closeWelcome() {
-  document.getElementById('welcomeModal').classList.remove('open');
-}
+function closeWelcome() { document.getElementById('welcomeModal').classList.remove('open'); }
 
 // ── INIT ──
+refreshAuthUI();
 loadGyms();
 document.getElementById('welcomeModal').classList.add('open');
 </script>
