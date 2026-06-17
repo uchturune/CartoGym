@@ -168,7 +168,28 @@ main{display:flex;height:calc(100vh - 104px)}
 .dtype.on{border-color:var(--cyan);background:rgba(0,200,255,0.1);color:var(--cyan)}
 .modnote{background:rgba(0,200,255,0.07);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:11px;color:var(--text);line-height:1.5;margin-bottom:14px;display:flex;gap:8px;align-items:flex-start}
 
-/* TOAST */
+/* WELCOME MODAL */
+.wmodal{background:var(--dark2);border:1px solid var(--border);border-radius:14px;width:460px;max-height:85vh;overflow-y:auto;box-shadow:0 0 50px rgba(0,200,255,0.18);transform:translateY(18px);transition:transform .22s;position:relative;padding:0}
+.moverlay.open .wmodal{transform:translateY(0)}
+.wm-banner{height:90px;background:linear-gradient(135deg,#0d3b4f,#0a1f33);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.wm-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(0,200,255,0.25),transparent 60%)}
+.wm-banner-icon{width:46px;height:46px;position:relative;z-index:1}
+.wm-body{padding:20px 24px 8px}
+.wm-title{font-family:'Barlow Condensed',sans-serif;font-size:21px;font-weight:900;color:var(--cyan);text-align:center;letter-spacing:.5px;text-shadow:0 0 14px rgba(0,200,255,0.45);margin-bottom:4px}
+.wm-badge{display:block;text-align:center;font-size:10px;font-weight:700;color:#ffb347;background:rgba(255,179,71,0.1);border:1px solid rgba(255,179,71,0.25);border-radius:20px;padding:4px 12px;width:fit-content;margin:0 auto 16px;text-transform:uppercase;letter-spacing:.6px}
+.wm-text{font-size:12.5px;color:var(--text);line-height:1.7;margin-bottom:14px}
+.wm-text strong{color:#e8f4fb}
+.wm-cta{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:11px 13px;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start}
+.wm-cta-icon{font-size:18px;flex-shrink:0}
+.wm-cta-text{font-size:11.5px;color:var(--text);line-height:1.6}
+.wm-contact{font-size:11.5px;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:18px}
+.wm-contact a{color:var(--cyan);text-decoration:none;font-weight:600}
+.wm-contact a:hover{text-decoration:underline}
+.wm-footer{padding:14px 24px 20px}
+.wm-close-btn{width:100%;padding:11px;font-size:12.5px;font-weight:700;letter-spacing:.4px;background:var(--cyan);color:#07090f;border:none;border-radius:8px;cursor:pointer;text-transform:uppercase;box-shadow:0 0 16px rgba(0,200,255,0.32);transition:all .2s}
+.wm-close-btn:hover{background:#00e5ff;box-shadow:0 0 22px rgba(0,200,255,0.5)}
+.wm-dismiss{display:block;text-align:center;font-size:10.5px;color:var(--muted);margin-top:10px;cursor:pointer;text-decoration:underline;background:none;border:none;width:100%}
+.wm-dismiss:hover{color:var(--cyan)}
 .toast{position:fixed;bottom:22px;right:22px;z-index:3000;background:var(--dark2);border:1px solid rgba(0,200,255,0.38);border-radius:9px;padding:11px 15px;font-size:12px;color:var(--cyan);box-shadow:0 0 18px rgba(0,200,255,0.18);transform:translateY(70px);opacity:0;transition:all .28s;font-weight:600}
 .toast.show{transform:translateY(0);opacity:1}
 </style>
@@ -362,6 +383,36 @@ main{display:flex;height:calc(100vh - 104px)}
 
 <div class="toast" id="toast"></div>
 
+<!-- WELCOME MODAL -->
+<div class="moverlay" id="welcomeModal">
+  <div class="wmodal">
+    <div class="wm-banner">
+      <img class="wm-banner-icon" src="Logo-CartoGYM.png" alt="CartoGym">
+    </div>
+    <div class="wm-body">
+      <div class="wm-title">Bienvenue sur CartoGym</div>
+      <span class="wm-badge">🚧 Site en construction</span>
+      <div class="wm-text">
+        CartoGym est une carte interactive qui recense les salles équipées pour la <strong>force athlétique</strong> (powerlifting, haltérophilie, bras de fer, strict curl...) partout en France : matériel disponible, notes, et bientôt mise en relation avec des coachs.
+      </div>
+      <div class="wm-text">
+        Le projet démarre tout juste — la base de données s'enrichit progressivement, salle par salle. Certaines infos peuvent encore être incomplètes ou approximatives.
+      </div>
+      <div class="wm-cta">
+        <span class="wm-cta-icon">🤝</span>
+        <span class="wm-cta-text">Vous connaissez une salle qui n'apparaît pas ? <strong>Ajoutez-la</strong> via le bouton "+ Ajouter ma salle" en haut de page — elle sera vérifiée puis publiée.</span>
+      </div>
+      <div class="wm-contact">
+        Une erreur, une idée, une remarque ?<br>
+        Écrivez-nous à <a href="mailto:contact@cartogym.fr">contact@cartogym.fr</a>
+      </div>
+    </div>
+    <div class="wm-footer">
+      <button class="wm-close-btn" onclick="closeWelcome()">J'ai compris, voir la carte</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ══════════════════════════════════════════
 const SUPABASE_URL = 'https://nlxjazoyjshxssielzxv.supabase.co';
@@ -505,8 +556,7 @@ function openDetail(g) {
   document.getElementById('dEquip').innerHTML = EQUIPS.map(e=>`<div class="erow"><span class="ename">${e.label}</span><span class="ebadge ${g[e.key]?'byes':'bno'}">${g[e.key]?'✓ Oui':'✗ Non'}</span></div>`).join('');
   // Reviews placeholder
   document.getElementById('dReviews').innerHTML = `
-    <div class="rev"><div class="revtop"><span class="rname">Utilisateur anonyme</span><span class="rdate">Récemment</span></div><div class="rtxt">Super salle, équipement de qualité. Ambiance powerlifting sérieuse. Je recommande !</div></div>
-    <div style="text-align:center;padding:10px;font-size:11px;color:var(--muted)">Connectez-vous pour voir tous les avis et en laisser un.</div>`;
+    <div style="text-align:center;padding:14px;font-size:11px;color:var(--muted)">Aucun avis pour le moment. Connectez-vous pour être le premier à en laisser un.</div>`;
   // Direction button
   document.getElementById('dDirectBtn').onclick = () => window.open(`https://www.google.com/maps/dir/?api=1&destination=${g.lat},${g.lng}`,'_blank');
   // Highlight card + zoom map
@@ -562,8 +612,13 @@ function showToast(msg) {
   setTimeout(()=>t.classList.remove('show'),2800);
 }
 
+function closeWelcome() {
+  document.getElementById('welcomeModal').classList.remove('open');
+}
+
 // ── INIT ──
 loadGyms();
+document.getElementById('welcomeModal').classList.add('open');
 </script>
 </body>
 </html>
