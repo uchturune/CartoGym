@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="À propos de CartoGym — Le projet, le créateur et la vision derrière la plateforme.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/Logo-CartoGYM.png">
+<link rel="apple-touch-icon" href="/Logo-CartoGYM.png">
+<title>À propos — CartoGym</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@700;900&display=swap');
+:root{--cyan:#00c8ff;--dark:#07090f;--dark2:#0d1220;--card:#0f1628;--border:rgba(0,200,255,0.18);--text:#d0eaf5;--muted:#5a7a8a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;font-family:'Barlow',sans-serif;background:var(--dark);color:var(--text)}
+
+/* HEADER */
+header{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:var(--dark2);border-bottom:1px solid var(--border);z-index:1000;position:sticky;top:0;box-shadow:0 2px 20px rgba(0,200,255,0.07)}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.logo-icon{width:42px;height:42px;flex-shrink:0}
+.logo-text{font-family:'Barlow Condensed',sans-serif;font-size:21px;font-weight:900;letter-spacing:2px;color:var(--cyan);text-shadow:0 0 14px rgba(0,200,255,0.7)}
+nav{display:flex;gap:4px}
+.nl{padding:6px 11px;font-size:11.5px;font-weight:600;letter-spacing:.4px;color:var(--muted);background:none;border:none;cursor:pointer;border-radius:6px;transition:all .2s;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center}
+.nl:hover,.nl.on{color:var(--cyan);background:rgba(0,200,255,0.08)}
+.auth{display:flex;gap:7px}
+.bmem{padding:6px 14px;font-size:11.5px;font-weight:700;border:1px solid var(--border);background:rgba(0,200,255,0.06);color:var(--cyan);border-radius:7px;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:6px}
+.bmem:hover{background:rgba(0,200,255,0.14);border-color:var(--cyan)}
+.bcoa{padding:6px 14px;font-size:11.5px;font-weight:700;background:var(--cyan);color:#07090f;border:none;border-radius:7px;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.4px;box-shadow:0 0 14px rgba(0,200,255,0.35)}
+.bcoa:hover{background:#00e5ff;box-shadow:0 0 22px rgba(0,200,255,0.55)}
+
+/* HERO */
+.hero{position:relative;width:100%;height:420px;overflow:hidden;display:flex;align-items:flex-end}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:brightness(.45)}
+.hero-gradient{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,var(--dark) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 60px 48px;max-width:860px}
+.hero-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan);background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.3);border-radius:20px;padding:4px 14px;margin-bottom:16px}
+.hero-title{font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;line-height:1.05;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.8)}
+.hero-title span{color:var(--cyan)}
+
+/* MAIN */
+.page{max-width:900px;margin:0 auto;padding:60px 24px 80px}
+
+/* SECTION */
+.section{margin-bottom:64px}
+.section-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:900;color:#e8f4fb;margin-bottom:20px;line-height:1.1}
+.section-body{font-size:16px;line-height:1.75;color:var(--text);max-width:680px}
+.section-body p+p{margin-top:14px}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin-bottom:64px}
+
+/* PROFILE CARD */
+.profile{display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap}
+.profile-photo{width:220px;min-width:220px;height:280px;border-radius:12px;object-fit:cover;object-position:center 15%;border:1px solid var(--border);box-shadow:0 0 40px rgba(0,200,255,0.12);flex-shrink:0}
+.profile-info{flex:1;min-width:260px}
+.profile-name{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:#fff;margin-bottom:4px}
+.profile-role{font-size:13px;font-weight:600;color:var(--cyan);letter-spacing:.5px;margin-bottom:20px}
+.profile-bio{font-size:15px;line-height:1.75;color:var(--text)}
+.profile-bio p+p{margin-top:12px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--card);color:var(--text)}
+
+/* STATS / VISION */
+.vision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:8px}
+.vcard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px 20px;transition:border-color .2s}
+.vcard:hover{border-color:rgba(0,200,255,0.4)}
+.vcard-icon{font-size:24px;margin-bottom:10px}
+.vcard-title{font-size:13px;font-weight:700;color:#e8f4fb;margin-bottom:6px}
+.vcard-desc{font-size:13px;line-height:1.65;color:var(--muted)}
+
+/* CTA */
+.cta-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:36px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;box-shadow:0 0 40px rgba(0,200,255,0.05)}
+.cta-text h3{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:#e8f4fb;margin-bottom:6px}
+.cta-text p{font-size:14px;color:var(--muted)}
+.cta-btn{padding:10px 22px;font-size:13px;font-weight:700;background:var(--cyan);color:#07090f;border:none;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;text-transform:uppercase;letter-spacing:.4px;box-shadow:0 0 14px rgba(0,200,255,0.35)}
+.cta-btn:hover{background:#00e5ff;box-shadow:0 0 22px rgba(0,200,255,0.55)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);background:var(--dark2);padding:24px;text-align:center;font-size:11px;color:var(--muted)}
+footer a{color:var(--muted);text-decoration:none;margin:0 8px}
+footer a:hover{color:var(--cyan)}
+
+@media(max-width:600px){
+  .hero{height:320px}
+  .hero-content{padding:0 20px 36px}
+  .hero-title{font-size:36px}
+  .page{padding:40px 16px 60px}
+  .profile{gap:24px}
+  .profile-photo{width:100%;min-width:unset;height:240px}
+  .cta-box{flex-direction:column;padding:24px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">
+    <div class="logo-icon">
+      <img src="Logo-CartoGYM.png" alt="CartoGym" style="width:100%;height:100%;object-fit:contain;display:block">
+    </div>
+    <span class="logo-text">CARTOGYM</span>
+  </a>
+  <nav>
+    <a class="nl" href="index.html">Carte</a>
+    <a class="nl on" href="a-propos.html">À propos</a>
+  </nav>
+  <div class="auth">
+    <button class="bmem">Connexion Membre</button>
+    <button class="bcoa">Espace Coach</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-img" src="deadlift.jpg" alt="Théo Larchier — deadlift">
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Le projet</div>
+    <h1 class="hero-title">Derrière <span>CartoGym</span></h1>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- PROFILE -->
+  <section class="section">
+    <div class="section-label">Le créateur</div>
+    <div class="profile">
+      <img class="profile-photo" src="about.jpg" alt="Théo Larchier">
+      <div class="profile-info">
+        <div class="profile-name">Théo Larchier</div>
+        <div class="profile-role">Étudiant ingénieur · Passionné de force athlétique</div>
+        <div class="profile-bio">
+          <p>Actuellement en école d'ingénieur, je pratique la musculation et la force athlétique depuis plusieurs années. Le deadlift, le squat, le développé couché — plus qu'un sport, c'est un mode de vie qui structure mes semaines et forge ma discipline.</p>
+          <p>Au fil de mes déplacements, j'ai réalisé à quel point il était compliqué de trouver une salle adaptée à sa pratique : plateaux olympiques, rack de squat, matériel de qualité. Les infos étaient éparpillées, les avis peu fiables, et aucun outil ne répondait vraiment aux besoins de tout le monde — débutants comme confirmés.</p>
+          <p>C'est de cette frustration qu'est né <strong style="color:#e8f4fb">CartoGym</strong>.</p>
+        </div>
+        <div class="badges">
+          <span class="badge">Force athlétique</span>
+          <span class="badge">Musculation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- VISION -->
+  <section class="section">
+    <div class="section-label">La vision</div>
+    <div class="section-title">Une plateforme pour tout le monde</div>
+    <div class="section-body">
+      <p>L'idée est simple : créer la référence en France pour trouver une salle de sport adaptée à sa pratique. Pas une simple liste de salles, mais une carte vivante, collaborative, qui renseigne sur le matériel disponible, l'ambiance, les disciplines accueillies.</p>
+      <p>Que tu débutes la musculation, que tu prépares une compétition de powerlifting ou que tu cherches juste une salle ouverte tard le soir — CartoGym te donne l'information en quelques secondes, peu importe ton niveau.</p>
+    </div>
+
+    <div class="vision-grid" style="margin-top:32px">
+      <div class="vcard">
+        <div class="vcard-icon">🗺️</div>
+        <div class="vcard-title">Toutes les salles de France</div>
+        <div class="vcard-desc">Une base de données exhaustive et vérifiée, enrichie par la communauté des pratiquants.</div>
+      </div>
+      <div class="vcard">
+        <div class="vcard-icon">⚙️</div>
+        <div class="vcard-title">Matériel détaillé</div>
+        <div class="vcard-desc">Plateaux olympiques, racks, chalk autorisé — les infos qui comptent vraiment, quel que soit ton niveau.</div>
+      </div>
+      <div class="vcard">
+        <div class="vcard-icon">🏆</div>
+        <div class="vcard-title">Compétitions & Coachs</div>
+        <div class="vcard-desc">Bientôt : retrouve les compétitions près de chez toi et les coachs spécialisés — powerlifting, haltérophilie, musculation, bras de fer et bien d'autres.</div>
+      </div>
+      <div class="vcard">
+        <div class="vcard-icon">🤝</div>
+        <div class="vcard-title">Communauté</div>
+        <div class="vcard-desc">Un projet open à tous — athlètes, gérants de salles, coachs. Tu peux contribuer dès maintenant.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div class="cta-text">
+      <h3>Ta salle n'est pas encore répertoriée ?</h3>
+      <p>Aide la communauté en ajoutant les informations de ta salle en quelques clics.</p>
+    </div>
+    <a class="cta-btn" href="index.html">Ajouter une salle →</a>
+  </div>
+
+</div>
+
+<footer>
+  <span>© 2025 CartoGym</span>
+  <a href="confidentialite.html">Politique de confidentialité</a>
+  <a href="mentions-legales.html">Mentions légales</a>
+  <a href="mailto:contact@cartogym.fr">contact@cartogym.fr</a>
+</footer>
+
+</body>
+</html>
