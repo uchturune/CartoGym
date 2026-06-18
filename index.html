@@ -245,7 +245,7 @@ select.finp{cursor:pointer}
   </nav>
 
   <div class="auth" id="authArea">
-    <button class="bmem" onclick="openAuth('login')">Connexion Membre</button>
+    <button class="bmem" onclick="showToast('🚧 Espace membre en travaux')">Connexion Membre</button>
     <button class="bcoa" onclick="showToast('🚧 Bientôt disponible')">Espace Coach</button>
   </div>
 </header>
@@ -299,6 +299,8 @@ select.finp{cursor:pointer}
       <div class="li"><div class="ld" style="background:#00c8ff;box-shadow:0 0 5px #00c8ff"></div>Musculation</div>
       <div class="li"><div class="ld" style="background:#a855f7;box-shadow:0 0 5px #a855f7"></div>Bras de Fer</div>
       <div class="li"><div class="ld" style="background:#ffffff;box-shadow:0 0 5px #ffffff"></div>Strict Curl</div>
+      <a href="confidentialite.html" style="display:block;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:10px;color:var(--muted);text-decoration:none">Politique de confidentialité</a>
+      <a href="mentions-legales.html" style="display:block;margin-top:4px;font-size:10px;color:var(--muted);text-decoration:none">Mentions légales</a>
     </div>
   </div>
 </main>
@@ -533,7 +535,8 @@ select.finp{cursor:pointer}
       </div>
       <div class="wm-contact">
         Une erreur, une idée, une remarque ?<br>
-        Écrivez-nous à <a href="mailto:contact@cartogym.fr">contact@cartogym.fr</a>
+        Écrivez-nous à <a href="mailto:contact@cartogym.fr">contact@cartogym.fr</a><br>
+        <a href="confidentialite.html" style="font-size:11px;opacity:.75">Politique de confidentialité</a> · <a href="mentions-legales.html" style="font-size:11px;opacity:.75">Mentions légales</a>
       </div>
     </div>
     <div class="wm-footer">
@@ -573,18 +576,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'�
 // AUTHENTIFICATION
 // ══════════════════════════════════════════
 async function refreshAuthUI() {
-  const { data } = await sb.auth.getUser();
-  currentUser = data?.user || null;
+  // 🚧 Espace membre temporairement désactivé (politique de confidentialité / CGPD à finaliser)
   const area = document.getElementById('authArea');
-  if (currentUser) {
-    area.innerHTML = `
-      <button class="bmem" onclick="openEspace()"><span class="avatar-dot"></span> ${currentUser.email}</button>
-      <button class="bcoa" onclick="showToast('🚧 Bientôt disponible')">Espace Coach</button>`;
-  } else {
-    area.innerHTML = `
-      <button class="bmem" onclick="openAuth('login')">Connexion Membre</button>
-      <button class="bcoa" onclick="showToast('🚧 Bientôt disponible')">Espace Coach</button>`;
-  }
+  area.innerHTML = `
+    <button class="bmem" onclick="showToast('🚧 Espace membre en travaux')">Connexion Membre</button>
+    <button class="bcoa" onclick="showToast('🚧 Bientôt disponible')">Espace Coach</button>`;
+  currentUser = null;
 }
 
 function openAuth(tab) {
@@ -821,7 +818,7 @@ async function loadReviews(salleId) {
 }
 
 function toggleReviewForm() {
-  if (!currentUser) { openAuth('login'); showToast('🔒 Connectez-vous pour laisser un avis'); return; }
+  if (!currentUser) { showToast('🚧 Espace membre en travaux — laisser un avis sera bientôt possible'); return; }
   const sect = document.getElementById('reviewFormSect');
   sect.style.display = sect.style.display === 'none' ? '' : 'none';
 }
@@ -834,7 +831,7 @@ document.getElementById('starPick').addEventListener('click', e => {
 });
 
 async function submitReview() {
-  if (!currentUser) { openAuth('login'); return; }
+  if (!currentUser) { showToast('🚧 Espace membre en travaux'); return; }
   if (!selectedStars) { showToast('⚠️ Choisissez une note (étoiles)'); return; }
   const commentaire = document.getElementById('reviewText').value.trim();
   const { error } = await sb.from('avis').insert([{
@@ -870,7 +867,7 @@ function shareGym() {
 // DEMANDE DE MODIFICATION
 // ══════════════════════════════════════════
 function openModifRequest() {
-  if (!currentUser) { closeModal('detailModal'); openAuth('login'); showToast('🔒 Connectez-vous pour suggérer une modification'); return; }
+  if (!currentUser) { closeModal('detailModal'); showToast('🚧 Espace membre en travaux — suggestion de modification bientôt disponible'); return; }
   document.getElementById('modifSalleName').textContent = currentGym.nom;
   document.getElementById('modifChamp').value = 'nom';
   document.getElementById('modifValeur').value = '';
