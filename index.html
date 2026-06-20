@@ -881,12 +881,17 @@ async function submitReview() {
     currentGym.nb_avis = tousAvis.length;
   }
 
+  // Met à jour l'entrée correspondante dans la liste (allGyms) pour que la note s'affiche dans le menu déroulant
+  const gymInList = allGyms.find(g => g.id === currentGym.id);
+  if (gymInList) { gymInList.note = currentGym.note; gymInList.nb_avis = currentGym.nb_avis; }
+
   showToast('✅ Avis publié, merci !');
   document.getElementById('reviewFormSect').style.display = 'none';
   await loadReviews(currentGym.id);
   document.getElementById('dNote').textContent = currentGym.note;
   document.getElementById('dStars').innerHTML = stars(currentGym.note);
   document.getElementById('dAvisCount').textContent = currentGym.nb_avis + ' avis';
+  filterGyms();
 }
 
 function shareGym() {
