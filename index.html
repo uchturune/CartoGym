@@ -517,6 +517,7 @@ select.finp{cursor:pointer}
     </div>
     <div class="mfoot">
       <button class="bsec" style="width:100%" onclick="handleLogout()">Se déconnecter</button>
+      <button class="bsec" style="width:100%;margin-top:8px;border-color:rgba(255,80,80,0.35);color:#ff6060;background:rgba(255,80,80,0.06)" onclick="deleteAccount()">Supprimer mon compte</button>
     </div>
   </div>
 </div>
@@ -647,6 +648,18 @@ async function handleLogout() {
   currentUser = null;
   closeModal('espaceModal');
   showToast('👋 Déconnecté');
+  await refreshAuthUI();
+}
+
+async function deleteAccount() {
+  if (!currentUser) return;
+  if (!confirm('Supprimer définitivement votre compte ? Vos avis et suggestions seront également supprimés. Cette action est irréversible.')) return;
+  const { error } = await sb.rpc('delete_my_account');
+  if (error) { showToast('❌ Erreur lors de la suppression du compte'); console.error(error); return; }
+  await sb.auth.signOut();
+  currentUser = null;
+  closeModal('espaceModal');
+  showToast('🗑️ Votre compte a été supprimé.');
   await refreshAuthUI();
 }
 
@@ -936,9 +949,9 @@ async function submitGym() {
     note: 0, nb_avis: 0, verified: false,
     submitted_by: currentUser.id
   }]);
-  if(error){ showToast('Erreur lors de l\'envoi'); console.error(error); return; }
+  if(error){ showToast('❌ Erreur lors de l\'envoi'); console.error(error); return; }
   closeModal('addModal');
-  showToast('Salle soumise ! Suivez son statut dans "Mon espace".');
+  showToast('✅ Salle soumise ! Suivez son statut dans "Mon espace".');
 }
 
 // ── UTILS ──
