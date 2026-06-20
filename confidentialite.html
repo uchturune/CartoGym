@@ -53,10 +53,10 @@ footer{text-align:center;padding:24px;font-size:11px;color:var(--muted);border-t
 <div class="wrap">
   <h1>Politique de confidentialité</h1>
   <div class="maj-tag">🚧 Site en cours de développement</div>
-  <p class="maj">Dernière mise à jour : 18 juin 2026</p>
+  <p class="maj">Dernière mise à jour : 21 juin 2026</p>
 
   <div class="card">
-    <p style="margin-bottom:0">CartoGym est actuellement <strong>en phase de développement</strong>. Certaines fonctionnalités (notamment la création de compte et la connexion membre) sont temporairement désactivées. Cette politique sera mise à jour à chaque évolution du traitement des données et avant toute réactivation de fonctionnalité impliquant de nouvelles données personnelles.</p>
+    <p style="margin-bottom:0">CartoGym est actuellement <strong>en phase de développement</strong>. Le Site propose désormais la création d'un compte membre permettant de publier des avis, de proposer des salles et de suggérer des modifications de fiches. Cette politique décrit l'ensemble des données traitées et sera mise à jour à chaque évolution du traitement des données.</p>
   </div>
 
   <h2>1. Qui sommes-nous ?</h2>
@@ -76,8 +76,26 @@ footer{text-align:center;padding:24px;font-size:11px;color:var(--muted);border-t
       <th>Base légale</th>
     </tr>
     <tr>
+      <td>Création et connexion d'un compte membre</td>
+      <td>Adresse email, mot de passe (stocké de façon chiffrée par notre hébergeur, jamais en clair) et <strong>pseudo</strong> choisi par le membre</td>
+      <td>Permettre l'identification du membre, la sécurisation de son compte et la publication de contributions sous un pseudonyme</td>
+      <td>Exécution de mesures précontractuelles / contrat (fourniture du service de compte demandé par l'utilisateur)</td>
+    </tr>
+    <tr>
+      <td>Publication d'un avis sur une salle</td>
+      <td>Note, commentaire libre, <strong>pseudo affiché publiquement</strong> aux côtés de l'avis, et identifiant du compte associé</td>
+      <td>Permettre le partage d'expériences et l'évaluation collaborative des salles</td>
+      <td>Consentement (publication volontaire d'un avis par le membre)</td>
+    </tr>
+    <tr>
+      <td>Suggestion de modification d'une fiche</td>
+      <td>Champ concerné, valeur proposée, commentaire et identifiant du compte associé</td>
+      <td>Permettre la correction et la mise à jour collaborative des fiches de salles</td>
+      <td>Consentement (envoi volontaire d'une suggestion par le membre)</td>
+    </tr>
+    <tr>
       <td>Formulaire « Ajouter ma salle »</td>
-      <td>Nom de la salle, ville, adresse, coordonnées GPS, disciplines, équipements. <strong>Aucune donnée d'identité personnelle n'est demandée dans ce formulaire.</strong></td>
+      <td>Nom de la salle, ville, adresse, coordonnées GPS, disciplines, équipements, et identifiant du compte ayant soumis la salle. <strong>Réservé aux membres connectés.</strong></td>
       <td>Permettre l'enrichissement collaboratif de l'annuaire de salles affiché sur la carte</td>
       <td>Intérêt légitime (constitution d'un annuaire participatif)</td>
     </tr>
@@ -89,18 +107,22 @@ footer{text-align:center;padding:24px;font-size:11px;color:var(--muted);border-t
     </tr>
   </table>
 
-  <p><strong>Fonctionnalités actuellement désactivées :</strong> la création de compte membre, la connexion membre, la publication d'avis et la suggestion de modification de fiche sont temporairement indisponibles (mention « en travaux » affichée sur le Site). Aucune donnée d'identification (email, mot de passe) n'est donc collectée à ce jour dans le cadre de ces fonctionnalités. Cette politique sera complétée en conséquence avant leur réactivation.</p>
+  <p><strong>Pseudonyme et publication publique :</strong> le pseudo que vous choisissez lors de la création de votre compte est affiché publiquement à côté des avis que vous publiez. Nous vous recommandons de ne pas y faire figurer de données permettant de vous identifier directement (nom et prénom complets, etc.). Votre adresse email, elle, n'est jamais affichée publiquement.</p>
 
   <h2>3. Qui a accès à ces données ?</h2>
-  <p>Les données collectées via le formulaire « Ajouter ma salle » sont destinées exclusivement à :</p>
+  <p>Les données collectées (compte membre, salles, avis, suggestions de modification) sont destinées à :</p>
   <ul>
-    <li><strong>Théo LARCHIER</strong>, responsable du traitement, pour la modération et la publication des fiches de salles ;</li>
-    <li><strong>Supabase Inc.</strong>, notre sous-traitant technique, qui héberge la base de données du Site. Supabase agit uniquement en tant qu'hébergeur des données et n'est pas autorisé à les utiliser pour son propre compte.</li>
+    <li><strong>Théo LARCHIER</strong>, responsable du traitement, pour la gestion des comptes, la modération et la publication des fiches de salles, des avis et des suggestions ;</li>
+    <li><strong>Supabase Inc.</strong>, notre sous-traitant technique, qui héberge la base de données et gère l'authentification du Site. Supabase agit uniquement en tant qu'hébergeur des données et n'est pas autorisé à les utiliser pour son propre compte ;</li>
+    <li><strong>les visiteurs du Site</strong>, pour les seules données rendues publiques de façon volontaire par le membre : le <strong>pseudo</strong> et le contenu des <strong>avis</strong> publiés.</li>
   </ul>
   <p>Aucune donnée n'est vendue, louée ou transmise à des fins commerciales ou publicitaires à des tiers.</p>
 
   <h2>4. Durée de conservation</h2>
   <ul>
+    <li><strong>Compte membre (email, pseudo) :</strong> conservé tant que le compte reste actif. Le compte et les données associées sont supprimés sur simple demande du membre (voir section 7), ou après une période d'inactivité prolongée.</li>
+    <li><strong>Avis publiés :</strong> conservés tant que le compte du membre existe et que l'avis demeure pertinent ; supprimés en cas de suppression du compte ou sur demande du membre.</li>
+    <li><strong>Suggestions de modification :</strong> conservées le temps de leur traitement, puis archivées ou supprimées.</li>
     <li><strong>Salles soumises en attente de vérification :</strong> conservées 6 mois maximum ; supprimées si la soumission n'est pas validée au-delà de ce délai.</li>
     <li><strong>Salles validées et publiées sur la carte :</strong> conservées tant qu'elles demeurent pertinentes pour l'annuaire, et mises à jour ou supprimées à la demande de l'établissement concerné.</li>
     <li><strong>Adresses IP transitant techniquement par notre hébergeur :</strong> la durée de conservation de ces journaux techniques est déterminée par Supabase, conformément à sa propre politique de confidentialité, et dépend du plan d'hébergement souscrit. CartoGym ne consulte ni n'exploite ces adresses IP de façon active.</li>
@@ -111,21 +133,23 @@ footer{text-align:center;padding:24px;font-size:11px;color:var(--muted);border-t
   <ul>
     <li>Chiffrement de toutes les communications entre votre navigateur et nos serveurs (protocole HTTPS/TLS) ;</li>
     <li>Hébergement de la base de données chez Supabase, qui applique ses propres mesures de sécurité techniques et organisationnelles ;</li>
-    <li>Restriction des accès en écriture/lecture à la base de données via des règles de sécurité au niveau des lignes (Row Level Security) ;</li>
-    <li>Aucun mot de passe ni identifiant de connexion n'est actuellement stocké, la fonctionnalité de compte membre étant désactivée.</li>
+    <li>Restriction des accès en écriture/lecture à la base de données via des règles de sécurité au niveau des lignes (Row Level Security), garantissant qu'un membre ne peut accéder qu'à ses propres données et contributions ;</li>
+    <li>Gestion de l'authentification et stockage des mots de passe par Supabase, sous forme chiffrée (hachée) : les mots de passe ne sont jamais stockés ni accessibles en clair, y compris par le responsable du traitement.</li>
   </ul>
-  <p class="note">Le Site étant en développement actif, ces mesures sont amenées à être renforcées et complétées, notamment lors de la réactivation de l'espace membre.</p>
+  <p class="note">Le Site étant en développement actif, ces mesures sont amenées à être renforcées et complétées au fil des évolutions.</p>
 
   <h2>6. Cookies et traceurs</h2>
-  <p>Le Site n'utilise actuellement aucun cookie publicitaire ni outil de mesure d'audience (Google Analytics ou équivalent). Seuls des cookies techniques strictement nécessaires au fonctionnement du Site (le cas échéant, gestion de session technique via notre hébergeur) peuvent être déposés. Ces cookies ne nécessitent pas de consentement préalable conformément aux recommandations de la CNIL, puisqu'ils sont indispensables au fonctionnement du Site.</p>
+  <p>Le Site n'utilise actuellement aucun cookie publicitaire ni outil de mesure d'audience (Google Analytics ou équivalent). Lorsqu'un membre se connecte à son compte, un jeton de session technique est stocké localement dans son navigateur (via le mécanisme de stockage local) afin de le maintenir connecté ; ce jeton est supprimé lors de la déconnexion. Ce stockage, comme les éventuels cookies techniques strictement nécessaires au fonctionnement du Site, est indispensable au service demandé par l'utilisateur et ne nécessite donc pas de consentement préalable conformément aux recommandations de la CNIL.</p>
 
   <h2>7. Vos droits</h2>
   <p>Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez des droits suivants sur les données vous concernant :</p>
   <ul>
     <li><strong>Droit d'accès</strong> : obtenir la confirmation que vos données sont traitées et en obtenir une copie ;</li>
     <li><strong>Droit de rectification</strong> : faire corriger des données inexactes ou incomplètes ;</li>
-    <li><strong>Droit à l'effacement</strong> : demander la suppression de vos données dans les conditions prévues par la loi ;</li>
+    <li><strong>Droit à l'effacement</strong> : vous pouvez supprimer vous-même votre compte à tout moment via le bouton « Supprimer mon compte » disponible dans votre espace membre. Cette suppression entraîne l'effacement définitif et immédiat de votre compte ainsi que des avis et suggestions associés. Vous pouvez également nous en faire la demande par email ;</li>
     <li><strong>Droit à la limitation du traitement</strong> ;</li>
+    <li><strong>Droit à la portabilité</strong> : recevoir les données que vous nous avez fournies dans un format structuré et lisible par machine ;</li>
+    <li><strong>Droit de retirer votre consentement</strong> à tout moment, pour les traitements fondés sur celui-ci (avis, suggestions), sans que cela remette en cause la licéité des traitements antérieurs ;</li>
     <li><strong>Droit d'opposition</strong>, pour les traitements fondés sur l'intérêt légitime.</li>
   </ul>
   <p>Pour exercer ces droits ou pour toute question relative au traitement de vos données, vous pouvez nous contacter à l'adresse : <a href="mailto:contact@cartogym.fr">contact@cartogym.fr</a></p>
